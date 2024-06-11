@@ -41,6 +41,7 @@ class AuthService {
 
     await storage.write(key: "jwt", value: jwt);
     await storage.write(key: "user", value: jsonEncode(userMap));
+    print(jwt);
 
     return Session(jwt: jwt, user: user);
   }

@@ -42,13 +42,19 @@ class FinancialStatementNetworkRepository extends FinancialStatementRepository {
     uri = uri.replace(queryParameters: <String, dynamic>{
       "jns_ang": budgetaryStage.id,
       "periode": year.toString(),
-      "kd_skpd": department?.code,
+      "kd_skpd": department?.code ?? 'all',
     });
     final response = await http.get(uri, headers: {"Authorization": "Bearer ${session?.jwt}"});
-
+    print(budgetaryStage.id);
+    print(year);
+    print(department?.code);
+// error
     final data = jsonDecode(response.body)["data"] as List<dynamic>;
     List<FinancialStatement> financialStatements = data.map((financialStatementJson) {
-      final section = int.tryParse(financialStatementJson["section"]) ?? 2;
+      print(data);
+      // final section = int.tryParse(financialStatementJson["section"]) ?? 2;
+      final section = financialStatementJson["section"] ?? 2;
+      print(section);
       return FinancialStatement(
         accountCode: financialStatementJson["kd_rek"] ?? "",
         accountName: financialStatementJson["nm_rek"] ?? "",

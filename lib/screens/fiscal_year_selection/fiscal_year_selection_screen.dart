@@ -41,7 +41,7 @@ class FiscalYearSelectionScreen extends StatelessWidget {
                   const Padding(padding: EdgeInsets.only(top: 8)),
                   ElevatedButton(
                     onPressed: () {
-                      context.push(AppRoute.account);
+                      context.push(AppRoute.home);
                     },
                     child: const Text("LANJUT"),
                   ),
