@@ -1,0 +1,60 @@
+{
+	"version": "2.0.0",
+	"inputs": [
+		{
+			"id": "env",
+			"type": "pickString",
+			"options": [
+				{
+					"label": "Development",
+					"value": "dev"
+				},
+				{
+					"label": "Staging",
+					"value": "stag"
+				},
+				{
+					"label": "Production",
+					"value": "prod"
+				}
+			],
+			"default": "dev",
+			"description": "Select build environment"
+		},
+		{
+			"id": "platform",
+			"type": "pickString",
+			"options": [
+				{
+					"label": "Android",
+					"value": "apk"
+				},
+				{
+					"label": "Web",
+					"value": "web"
+				},
+				{
+					"label": "Windows",
+					"value": "windows"
+				}
+			],
+			"default": "apk",
+			"description": "Select build platform"
+		}
+	],
+	"tasks": [
+		{
+			"type": "flutter",
+			"command": "flutter",
+			"args": [
+				"build",
+				"${input:platform}",
+				"--dart-define=env=${input:env}"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"label": "flutter: flutter build apk",
+			"detail": ""
+		}
+	]
+}

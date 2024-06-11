@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "name": "Launch",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "--dart-define=env=${input:env}"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "env",
+            "type": "pickString",
+            "options": [
+                {
+                    "label": "Development",
+                    "value": "dev"
+                },
+                {
+                    "label": "Staging",
+                    "value": "stag"
+                },
+                {
+                    "label": "Production",
+                    "value": "prod"
+                }
+            ],
+            "default": "dev",
+            "description": "Select build environment"
+        }
+    ]
+}
