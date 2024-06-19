@@ -33,8 +33,11 @@ class LraScreen extends StatelessWidget {
                           itemCount: state.length,
                           itemBuilder: (context, index) {
                             final financialStatement = state[index];
+                            print('state');
+                            print(state.length);
                             return FinancialStatementItem(financialStatement: financialStatement);
                           },
+                          
                         );
                       },
                     ),

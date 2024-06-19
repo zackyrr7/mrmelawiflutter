@@ -37,20 +37,36 @@ class FinancialStatementNetworkRepository extends FinancialStatementRepository {
   @override
   Future<List<FinancialStatement>> getRek4(int year, BudgetaryStage budgetaryStage, Department? department) async {
     final session = await AuthService.instance.getSession();
+  String departmentKode ='';
+  
+  if (department?.code != null) {
+     departmentKode = department!.code;
+  }else{
+     departmentKode ='';
+  }
 
+  if (departmentKode == 'All') {
+    departmentKode ='';
+  }
+
+ 
     Uri uri = Uri.parse("${Env.endpoint}/rek4");
     uri = uri.replace(queryParameters: <String, dynamic>{
       "jns_ang": budgetaryStage.id,
       "periode": year.toString(),
-      "kd_skpd": department?.code ?? 'all',
+      "kd_skpd": departmentKode,
+
+      
     });
     final response = await http.get(uri, headers: {"Authorization": "Bearer ${session?.jwt}"});
     print(budgetaryStage.id);
     print(year);
-    print(department?.code);
+    print(departmentKode);
 // error
     final data = jsonDecode(response.body)["data"] as List<dynamic>;
-    List<FinancialStatement> financialStatements = data.map((financialStatementJson) {
+    
+  List<FinancialStatement> financialStatements = data.map((financialStatementJson) {
+    
       print(data);
       // final section = int.tryParse(financialStatementJson["section"]) ?? 2;
       final section = financialStatementJson["section"] ?? 2;
@@ -64,7 +80,7 @@ class FinancialStatementNetworkRepository extends FinancialStatementRepository {
       );
     }).toList();
     return financialStatements;
-  }
+    }
 
   @override
   Future<void> setRek2(
