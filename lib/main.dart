@@ -77,6 +77,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: routes,
       theme: ThemeData(
         fontFamily: GoogleFonts.poppins().fontFamily,

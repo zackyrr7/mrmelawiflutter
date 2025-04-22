@@ -62,6 +62,7 @@ class FinancialStatementNetworkRepository extends FinancialStatementRepository {
     print(budgetaryStage.id);
     print(year);
     print(departmentKode);
+    print(response.statusCode);
 // error
     final data = jsonDecode(response.body)["data"] as List<dynamic>;
     
